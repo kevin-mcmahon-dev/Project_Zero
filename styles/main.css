@@ -13,3 +13,54 @@ body {
     /*grid-template-columns: repeat(10, minmax(0,1fr));*/
     grid-template-rows: auto;
 }
+
+.Zone-End {
+    grid-row: 1/2;
+    grid-column: 1;
+    background-color: white;
+}
+.Zone8 {
+    grid-row: 2/3;
+    grid-column: 1;
+    background-color: violet;
+}
+.Zone7 {
+    grid-row: 3/4;
+    grid-column: 1;
+    background-color: purple;
+}
+.Zone6 {
+    grid-row: 4/5;
+    grid-column: 1;
+    background-color: green;
+}
+.Zone5 {
+    grid-row: 5/6;
+    grid-column: 1;
+    background-color: orange;
+}
+.Zone4{
+    grid-row: 6/7;
+    grid-column: 1;
+    background-color: yellow;
+}
+.Zone3 {
+    grid-row: 7/8;
+    grid-column: 1;
+    background-color: red;
+}
+.Zone2 {
+    grid-row: 8/9;
+    grid-column: 1;
+    background-color: blueviolet;
+}
+.Zone1 {
+    grid-row: 9/10;
+    grid-column: 1;
+    background-color: teal;
+}
+.Zone-Start {
+    grid-row: 10;
+    grid-column: 1/end;
+    background-color: white;
+}
