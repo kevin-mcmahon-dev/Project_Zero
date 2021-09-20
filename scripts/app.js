@@ -35,6 +35,7 @@ function moveBlockRight() {
     }
 }
 
+///Event listener to read for arrow key inputs
 let startRow = 10;
 let startPlayerMarginRight = 339;
 let startPlayerMarginLeft = 339;
