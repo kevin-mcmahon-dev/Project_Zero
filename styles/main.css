@@ -65,15 +65,103 @@ body {
     background-color: white;
 }
 
+/* .obstacle { //trying to create multiple classes to make code dry
+    grid-column: 1;
+    /*grid-column: 3/4;*/
+    /* margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.motionLeft {
+    margin-right: 0px;
+    margin-left: 660px;
+}
+.motionRight {
+    margin-right: 660px;
+    margin-left: 0px;
+}  */ 
 .obstacle1 {
-    grid-row: 5/6;
+    grid-row: 9/10;
     grid-column: 1;
     /*grid-column: 3/4;*/
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 0px;
     margin-left: 660px;
-    /*padding: 0px 300px 0px 300px;*/
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle2 {
+    grid-row: 8/9;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 660px;
+    margin-left: 0px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle3 {
+    grid-row: 7/8;
+    grid-column: 1;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 660px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle4 {
+    grid-row: 6/7;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 660px;
+    margin-left: 0px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle5 {
+    grid-row: 5/6;
+    grid-column: 1;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 660px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle6 {
+    grid-row: 4/5;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 660px;
+    margin-left: 0px;
+    background-color: purple;
+    border-radius: 10px;
+}
+.obstacle7 {
+    grid-row: 3/4;
+    grid-column: 1;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 660px;
+    background-color: blue;
+    border-radius: 10px;
+}
+.obstacle8 {
+    grid-row: 2/3;
+    grid-column: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 660px;
+    margin-left: 0px;
     background-color: purple;
     border-radius: 10px;
 }
