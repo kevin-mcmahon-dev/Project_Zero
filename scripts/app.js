@@ -33,7 +33,50 @@ function moveBlockRight() {
         $(".obstacle6").hide();
         $(".obstacle8").hide();
     }
-        }
+}
+
+let startRow = 10;
+let startPlayerMarginRight = 339;
+let startPlayerMarginLeft = 339;
+window.addEventListener("keydown", function (e) {
+    // if (e.defaultPrevented) {
+    //     return;
+    // }
+    switch (e.key) {
+        case "ArrowDown":
+            console.log("down");
+            if (startRow === 10) {
+                break;
+            }
+            $(".player").css({gridRow: `${startRow = startRow + 1}`});
+            break;
+        case "ArrowUp":
+            console.log("up");
+            if (startRow === 1) {
+                break;
+            }
+            $(".player").css({gridRow: `${startRow = startRow - 1}`});
+            break;
+        case "ArrowLeft":
+            console.log("left");
+            if (startPlayerMarginLeft <= 0) {
+                break;
+            }
+            $(".player").css({marginRight: `${startPlayerMarginRight += 20}px`, marginLeft: `${startPlayerMarginLeft -= 20}px`});
+            break;
+        case "ArrowRight":
+            console.log("right");
+            if (startPlayerMarginRight <= 0) {
+                break;
+            }
+            $(".player").css({marginRight: `${startPlayerMarginRight -= 20}px`, marginLeft: `${startPlayerMarginLeft += 20}px`});
+            break;
+        default:
+            return;
+    }
+
+    e.preventDefault();
+}, true);
 
 setInterval(moveBlockLeft, 10);
 setInterval(moveBlockRight, 10);

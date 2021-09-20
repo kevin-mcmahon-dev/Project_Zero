@@ -64,6 +64,19 @@ body {
     grid-column: 1/end;
     background-color: white;
 }
+.player {
+    grid-row: 10;
+    grid-column: 1;
+    background-color: black;
+    border-radius: 50%;
+    height: 42px;
+    width: 42px;
+    margin-top: 5px;
+    margin-right: 339px;
+    margin-bottom: 5px; 
+    margin-left: 339px;
+
+}
 
 /* .obstacle { //trying to create multiple classes to make code dry
     grid-column: 1;
