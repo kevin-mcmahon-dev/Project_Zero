@@ -1,17 +1,12 @@
-let startRow = 10;
-let startPlayerMarginRight = 339;
-let startPlayerMarginLeft = 339;
-
-let increment = 0;
-
-let obstacleX
-let playerX = startPlayerMarginRight;
+let obstacleX;
+let playerX;
 let playerWidth = 42;
 let obstacleWidth = 60;
 
-
-console.log(typeof(playerX));
-console.log(typeof(obstacleX));
+let startRow = 10; //player start row
+let startPlayerMarginRight = 339;
+let startPlayerMarginLeft = 339;
+let increment = 0;
 
 function moveBlock() {
         
@@ -32,8 +27,13 @@ function moveBlock() {
             increment = 0;
         }
         //&& $(".obstacle1").css({gridRow: 9/10}) === $(".player").css({gridRow: 9/10}) *conditional addendum to check for grid-row
-        if (playerX < (obstacleX + obstacleWidth) && (playerX + playerWidth) > obstacleX) {
-            console.log("A collision has been detected");
+        if (playerX < (obstacleX + obstacleWidth) && (playerX + playerWidth) > obstacleX && 
+            (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
+            console.log("hit from right");
+        }
+        if (playerX < ((660-increment)+obstacleWidth) && (playerX + playerWidth) > (660-increment) && 
+            (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
+            console.log("hit from left")
         }
         // console.log(obstacleX);
 }
@@ -104,7 +104,9 @@ window.addEventListener("keydown", function (e) {
         default:
             return;
     }
+    console.log(startRow);
     console.log(startPlayerMarginRight);
+    playerX = startPlayerMarginRight;
     e.preventDefault();
 }, true);
 
