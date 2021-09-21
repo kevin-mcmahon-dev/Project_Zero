@@ -16,8 +16,13 @@
     <title>Jumping Game</title>
 </head>
 <body>
+    <div class = "title-section"> 
+        <h1>Pillars of Doom</h1>
+        <p>You must navigate past the moving obstacles to reach the safe zone. Navigate using the arrow keys. If you are hit by an obstacle or move out of the game area, you will lose a life. If you lose three lives, Game Over.</p>
+        <input type="button" class = "startGame" value = "Start">
+    </div>
     <div id="gameContainer">
-        <div class = "Zone-Start">Start</div>
+        <div class = "Zone-Start"></div>
         <div class = "Zone1"></div>
         <div class = "Zone2"></div>
         <div class = "Zone3"></div>
@@ -26,27 +31,29 @@
         <div class = "Zone6"></div>
         <div class = "Zone7"></div>
         <div class = "Zone8"></div>
-        <div class = "Zone-End">End</div>
+        <div class = "Zone-End"></div>
 
         <div class="player"></div>
 
-        <div class = "obstacle1"></div> 
-        <div class = "obstacle2"></div>
-        <div class = "obstacle3"></div>
-        <div class = "obstacle4"></div>
-        <div class = "obstacle5"></div>
-        <div class = "obstacle6"></div>
-        <div class = "obstacle7"></div>
-        <div class = "obstacle8"></div>
+        <div class = "motionLeft obstacle1 obstacle"></div> 
+        <div class = "motionRight obstacle2 obstacle" ></div> 
+        <div class = "motionLeft obstacle3 obstacle" ></div> 
+        <div class = "motionRight obstacle4 obstacle" ></div> 
+        <div class = "motionLeft obstacle5 obstacle" ></div> 
+        <div class = "motionRight obstacle6 obstacle" ></div> 
+        <div class = "motionLeft obstacle7 obstacle" ></div> 
+        <div class = "motionRight obstacle8 obstacle" ></div> 
 
-        <div class = "obstacle9"></div> 
-        <div class = "obstacle10"></div>
-        <div class = "obstacle11"></div>
-        <div class = "obstacle12"></div>
-        <div class = "obstacle13"></div>
-        <div class = "obstacle14"></div>
-        <div class = "obstacle15"></div>
-        <div class = "obstacle16"></div>
+        <div class = "motionLeftOffset obstacle9 obstacle"></div> 
+        <div class = "motionRightOffset obstacle10 obstacle"></div>
+        <div class = "motionLeftOffset obstacle11 obstacle"></div>
+        <div class = "motionRightOffset obstacle12 obstacle"></div>
+        <div class = "motionLeftOffset obstacle13 obstacle"></div>
+        <div class = "motionRightOffset obstacle14 obstacle"></div>
+        <div class = "motionLeftOffset obstacle15 obstacle"></div>
+        <div class = "motionRightOffset obstacle16 obstacle"></div>
     </div>
+    <h3>Game Over</h3>
+    <input type="button" class = "playAgain" value = "Play Again">
 </body>
 </html>
