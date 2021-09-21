@@ -4,54 +4,56 @@ let startPlayerMarginLeft = 339;
 
 let increment = 0;
 
+let obstacleX
 let playerX = startPlayerMarginRight;
 let playerWidth = 42;
-let obstacleX = increment;
 let obstacleWidth = 60;
 
-console.log(playerX);
-console.log(obstacleX);
+
 console.log(typeof(playerX));
 console.log(typeof(obstacleX));
 
-function moveBlockLeft() {
+function moveBlock() {
         
     increment += 2;
-    
+    obstacleX = increment;
         $(".obstacle1").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); //had difficulty with syntax of template literals in this case
         $(".obstacle3").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
         $(".obstacle5").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
         $(".obstacle7").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
+        $(".obstacle2").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
+        $(".obstacle4").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
+        $(".obstacle6").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
+        $(".obstacle8").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
 
         //Trying to make block disappear when it leaves game area
         if (increment >= 720) {
             // $(".obstacle1").hide();
-            // $(".obstacle3").hide();
-            // $(".obstacle5").hide();
-            // $(".obstacle7").hide();
             increment = 0;
-
         }
+        //&& $(".obstacle1").css({gridRow: 9/10}) === $(".player").css({gridRow: 9/10}) *conditional addendum to check for grid-row
+        if (playerX < (obstacleX + obstacleWidth) && (playerX + playerWidth) > obstacleX) {
+            console.log("A collision has been detected");
+        }
+        // console.log(obstacleX);
 }
 
-let incrementRight = 0;
-function moveBlockRight() {
+//Previously had two separate functions for motion right and motion left
+// let incrementRight = 0;
+// function moveBlockRight() {
         
-    incrementRight += 2;
-    $(".obstacle2").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
-    $(".obstacle4").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
-    $(".obstacle6").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
-    $(".obstacle8").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
+//     incrementRight += 2;
+//     $(".obstacle2").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
+//     $(".obstacle4").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
+//     $(".obstacle6").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
+//     $(".obstacle8").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
     
-    //Trying to make block disappear when it leaves game area
-    if (incrementRight >= 720) {
-        // $(".obstacle2").hide();
-        // $(".obstacle4").hide();
-        // $(".obstacle6").hide();
-        // $(".obstacle8").hide();
-        incrementRight = 0;
-    }
-}
+//     //Trying to make block disappear when it leaves game area
+//     if (incrementRight >= 720) {
+//         // $(".obstacle2").hide();
+//         incrementRight = 0;
+//     }
+// }
 
 let lives = 3;
 function lostLife() {
@@ -102,13 +104,10 @@ window.addEventListener("keydown", function (e) {
         default:
             return;
     }
-
+    console.log(startPlayerMarginRight);
     e.preventDefault();
 }, true);
 
-setInterval(moveBlockLeft, 10);
-setInterval(moveBlockRight, 10);
+setInterval(moveBlock, 10);
 
-if (playerX < (obstacleX + obstacleWidth) && (playerX + playerWidth) > obstacleX) {
-    console.log("A collision has been detected");
-}
+
