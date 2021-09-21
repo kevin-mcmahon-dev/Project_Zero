@@ -1,69 +1,84 @@
-let obstacleX;
-let playerX;
+let playerX; //Assigned value based on arrow key entry
 let playerWidth = 42;
 let obstacleWidth = 60;
+let lives = 3;
 
 let startRow = 10; //player start row
 let startPlayerMarginRight = 339;
 let startPlayerMarginLeft = 339;
-let increment = 0;
+
+let increment = 0; //defined outside function so the value can accumulate
+let incrementMiddle = 0;
 
 function moveBlock() {
         
     increment += 2;
-    obstacleX = increment;
-        $(".obstacle1").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); //had difficulty with syntax of template literals in this case
-        $(".obstacle3").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
-        $(".obstacle5").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
-        $(".obstacle7").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
-        $(".obstacle2").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
-        $(".obstacle4").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
-        $(".obstacle6").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
-        $(".obstacle8").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
+    incrementMiddle += 2;
 
-        //Trying to make block disappear when it leaves game area
-        if (increment >= 720) {
-            // $(".obstacle1").hide();
-            increment = 0;
-        }
-        //&& $(".obstacle1").css({gridRow: 9/10}) === $(".player").css({gridRow: 9/10}) *conditional addendum to check for grid-row
-        if (playerX < (obstacleX + obstacleWidth) && (playerX + playerWidth) > obstacleX && 
-            (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
-            console.log("hit from right");
-        }
-        if (playerX < ((660-increment)+obstacleWidth) && (playerX + playerWidth) > (660-increment) && 
-            (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
-            console.log("hit from left")
-        }
-        // console.log(obstacleX);
+    $(".obstacle1").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); //had difficulty with syntax of template literals in this case
+    $(".obstacle3").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
+    $(".obstacle5").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
+    $(".obstacle7").css({ marginRight: `${increment}px`, marginLeft: `${660-increment}px` }); 
+    $(".obstacle2").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
+    $(".obstacle4").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
+    $(".obstacle6").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` }); 
+    $(".obstacle8").css({ marginRight: `${660-increment}px`, marginLeft: `${increment}px` });
+
+    $(".obstacle9").css({ marginRight: `${360 + incrementMiddle}px`, marginLeft: `${300-incrementMiddle}px` });
+    $(".obstacle11").css({ marginRight: `${360 + incrementMiddle}px`, marginLeft: `${300-incrementMiddle}px` });
+    $(".obstacle13").css({ marginRight: `${360 + incrementMiddle}px`, marginLeft: `${300-incrementMiddle}px` });
+    $(".obstacle15").css({ marginRight: `${360 + incrementMiddle}px`, marginLeft: `${300-incrementMiddle}px` });
+    $(".obstacle10").css({ marginRight: `${300-incrementMiddle}px`, marginLeft: `${360 + incrementMiddle}px` }); 
+    $(".obstacle12").css({ marginRight: `${300-incrementMiddle}px`, marginLeft: `${360 + incrementMiddle}px` });
+    $(".obstacle14").css({ marginRight: `${300-incrementMiddle}px`, marginLeft: `${360 + incrementMiddle}px` }); 
+    $(".obstacle16").css({ marginRight: `${300-incrementMiddle}px`, marginLeft: `${360 + incrementMiddle}px` });
+
+    if (increment >= 720) { //resets increment value when obstacle leaves game area, creating appearance that it looped back to original location
+        increment = 0;
+    }
+
+    if (incrementMiddle >= 360) {
+        incrementMiddle = -360;
+    }
+
+    if (playerX < (increment + obstacleWidth) && (playerX + playerWidth) > increment && 
+        (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
+        console.log("hit from right");
+        lostLife();
+    }
+
+    if (playerX < (incrementMiddle + obstacleWidth + 360) && (playerX + playerWidth) > (incrementMiddle + 360) && 
+        (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
+        console.log("hit from right");
+        lostLife();
+    }
+
+    if (playerX < ((660-increment)+obstacleWidth) && (playerX + playerWidth) > (660-increment) && 
+        (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
+        console.log("hit from left");
+        lostLife();
+    }
+
+    if (playerX < ((300-incrementMiddle)+obstacleWidth) && (playerX + playerWidth) > (300-incrementMiddle) && 
+        (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
+        console.log("hit from left");
+        lostLife();
+    }
 }
 
-//Previously had two separate functions for motion right and motion left
-// let incrementRight = 0;
-// function moveBlockRight() {
-        
-//     incrementRight += 2;
-//     $(".obstacle2").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
-//     $(".obstacle4").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
-//     $(".obstacle6").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` }); 
-//     $(".obstacle8").css({ marginRight: `${660-incrementRight}px`, marginLeft: `${incrementRight}px` });
-    
-//     //Trying to make block disappear when it leaves game area
-//     if (incrementRight >= 720) {
-//         // $(".obstacle2").hide();
-//         incrementRight = 0;
-//     }
-// }
-
-let lives = 3;
 function lostLife() {
     lives -= 1;
-    //add code that resets game to beginning
+    $(".player").css({gridRow: "10", marginRight: "339px"});
+    startRow = 10; //player start row
+    startPlayerMarginRight = 339;
+    startPlayerMarginLeft = 339;
+
     if (lives <= 0) {
         console.log("Game Over");
         // $("body").css({position: "absolute"}); //create game over message on game board
     }
 }
+
 ///Event listener to read for arrow key inputs
 window.addEventListener("keydown", function (e) {
     // if (e.defaultPrevented) {
@@ -71,21 +86,18 @@ window.addEventListener("keydown", function (e) {
     // }
     switch (e.key) {
         case "ArrowDown":
-            console.log("down");
             if (startRow === 10) {
                 break;
             }
             $(".player").css({gridRow: `${startRow = startRow + 1}`});
             break;
         case "ArrowUp":
-            console.log("up");
             if (startRow === 1) {
                 break;
             }
             $(".player").css({gridRow: `${startRow = startRow - 1}`});
             break;
         case "ArrowLeft":
-            console.log("left");
             if (startPlayerMarginLeft < 0) {
                 lostLife();
                 break;
@@ -93,7 +105,6 @@ window.addEventListener("keydown", function (e) {
             $(".player").css({marginRight: `${startPlayerMarginRight += 52}px`, marginLeft: `${startPlayerMarginLeft -= 52}px`});
             break;
         case "ArrowRight":
-            console.log("right");
             if (startPlayerMarginRight < 0) {
                 lostLife();
                 break;
@@ -104,12 +115,11 @@ window.addEventListener("keydown", function (e) {
         default:
             return;
     }
-    console.log(startRow);
-    console.log(startPlayerMarginRight);
+
     playerX = startPlayerMarginRight;
     e.preventDefault();
 }, true);
 
-setInterval(moveBlock, 10);
+setInterval(moveBlock, 7);
 
 
