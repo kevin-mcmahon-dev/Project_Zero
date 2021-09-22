@@ -10,15 +10,16 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <script src="https://kit.fontawesome.com/927868e096.js" crossorigin="anonymous"></script>
     <script src = "scripts/app.js" defer></script>
     <link rel="stylesheet" href="styles/main.css"/>
     <style></style>
-    <title>Jumping Game</title>
+    <title>Pillars of Doom</title>
 </head>
 <body>
     <div class = "title-section"> 
-        <h1>Title</h1>
-        <p>You must navigate past the moving obstacles to reach the safe zone. Navigate using the arrow keys. If you are hit by an obstacle or move out of the game area, you will lose a life. If you lose three lives, Game Over.</p>
+        <h1>Pillars of Doom</h1>
+        <p>You must navigate past the moving obstacles to reach the safe zone. Navigate using the arrow keys. If you are hit by an obstacle or move out of the game area, you will lose a life. If you lose three lives, you lose the game.</p>
         <input type="button" class = "startGame" value = "Start">
     </div>
     <div id="gameContainer">
@@ -31,18 +32,25 @@
         <div class = "Zone6"></div>
         <div class = "Zone7"></div>
         <div class = "Zone8"></div>
-        <div class = "Zone-End"></div>
+        <div class = "Zone-End">
+            <p class = "LifeCounter">Lives:             
+                <i class="fas fa-heart heart1"></i>
+                <i class="fas fa-heart heart2"></i>
+                <i class="fas fa-heart heart3"></i>
+            </p>
+            <p class = "Timer">Time: 0s</p>
+        </div>
 
         <div class="player"></div>
 
         <div class = "motionLeft obstacle1 obstacle"></div> 
-        <div class = "motionRight obstacle2 obstacle" ></div> 
-        <div class = "motionLeft obstacle3 obstacle" ></div> 
-        <div class = "motionRight obstacle4 obstacle" ></div> 
-        <div class = "motionLeft obstacle5 obstacle" ></div> 
-        <div class = "motionRight obstacle6 obstacle" ></div> 
-        <div class = "motionLeft obstacle7 obstacle" ></div> 
-        <div class = "motionRight obstacle8 obstacle" ></div> 
+        <div class = "motionRight obstacle2 obstacle"></div> 
+        <div class = "motionLeft obstacle3 obstacle"></div> 
+        <div class = "motionRight obstacle4 obstacle"></div> 
+        <div class = "motionLeft obstacle5 obstacle"></div> 
+        <div class = "motionRight obstacle6 obstacle"></div> 
+        <div class = "motionLeft obstacle7 obstacle"></div> 
+        <div class = "motionRight obstacle8 obstacle"></div> 
 
         <div class = "motionLeftOffset obstacle9 obstacle"></div> 
         <div class = "motionRightOffset obstacle10 obstacle"></div>

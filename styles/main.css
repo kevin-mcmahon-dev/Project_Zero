@@ -39,6 +39,21 @@ p {
     grid-column: 1;
     background-color: white;
 }
+.LifeCounter {
+    font-size: 16px;
+    margin: 5px 0px 0px 5px;
+    display: inline;
+}
+.fa-heart {
+    color: red;
+    font-size: 14px;
+    display: inline;
+}
+.Timer {
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
 .Zone8 {
     grid-row: 2/3;
     grid-column: 1;
@@ -106,6 +121,7 @@ p {
     margin-bottom: 5px;
     background-color: rgba(0,0,0,0);
     border-radius: 10px;
+    /*transition: all 2s linear; */
 } 
 .motionLeft {
     margin-right: 0px;
