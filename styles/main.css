@@ -4,7 +4,7 @@ body {
     background-color: black;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
+    font-family: monospace;
 }
 .title-section {
     color: white;
@@ -24,6 +24,7 @@ p {
 }
 .startGame {
     margin: 10px 0px 0px 0px;
+    font-family: monospace;
 }
 #gameContainer {
     background-color: white;
@@ -124,12 +125,12 @@ p {
     /*transition: all 2s linear; */
 } 
 .motionLeft {
-    margin-right: 0px;
-    margin-left: 660px;
+    margin-right: -60px;
+    margin-left: 720px;
 }
 .motionRight {
-    margin-right: 660px;
-    margin-left: 0px;
+    margin-right: 720px;
+    margin-left: -60px;
 }
 .motionLeftOffset {
     margin-right: 360px;
@@ -205,4 +206,5 @@ p {
 .playAgain {
     display: none;
     margin-top: 10px;
+    font-family: monospace;
 }
