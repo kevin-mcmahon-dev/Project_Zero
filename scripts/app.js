@@ -59,9 +59,25 @@ function moveBlock() {
         console.log("hit from left");
         lostLife();
     }
+
+    if (startRow === 1) {
+        winGame();
+    }
 }
 
 setInterval(moveBlock, 10);
+
+function winGame() {
+    $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
+    startRow = 10; //player start row
+    startPlayerMarginRight = 339;
+    startPlayerMarginLeft = 339;
+
+    $("#gameContainer").css({display: "none"});
+    $(".Win-Message").css({display: "block"})
+    $(".playAgain").css({display: "block"});
+    lives = 3;
+}
 
 function lostLife() {
     lives -= 1;
@@ -72,7 +88,7 @@ function lostLife() {
 
     if (lives <= 0) {
         $("#gameContainer").css({display: "none"});
-        $("h3").css({display: "block"})
+        $(".Loss-Message").css({display: "block"})
         $(".playAgain").css({display: "block"});
         lives = 3;
         console.log("Game Over"); //resets life value if "Play Again" button is selected
@@ -122,12 +138,15 @@ window.addEventListener("keydown", function (e) {
 }
 
 $(".startGame").on("click", playGame);
+
 $(".playAgain").on("click", function () {
     console.log("Another one");
 
     $("#gameContainer").css({display: "grid"});
-    $("h3").css({display: "none"});
+    $(".Loss-Message").css({display: "none"});
+    $(".Win-Message").css({display: "none"});
     $(".playAgain").css({display: "none"});
+    $("#gameContainer").reset();
 
     playGame();
 });
