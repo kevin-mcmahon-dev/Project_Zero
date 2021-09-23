@@ -1,6 +1,15 @@
 let lives = 3;
 let timer = 0;
+let level = 1;
+let score = 0;
 
+let moveBlockLeftInterval;
+let moveBlockMiddleLeftInterval;
+let moveBlockRightInterval;
+let moveBlockMiddleRightInterval;
+let timerInterval;
+
+let highScore = [];
 function playGame() {
 
     $(".player").css({backgroundColor: "rgba(0,0,0,100)"});
@@ -37,13 +46,21 @@ function playGame() {
             lostLife();
         }
 
-        //If player reaches end zone, game is over, and winGame() is executed
-        if (startRow === 1) {
+        if (startRow === 1 && level < 10) {
+            increaseLevel();
+        } else if (startRow === 1 && level >= 10) {
+            
+            if (lives === 1) {
+                score += 50;
+            } else if (lives === 2) {
+                score += 200;
+            } else if (lives === 3) {
+                score += 500;
+            }
+
             winGame();
         }
     }
-
-    setInterval(moveBlockLeft, 4);
 
     function moveBlockMiddleLeft() {
 
@@ -61,13 +78,21 @@ function playGame() {
             lostLife();
         }
 
-        //If player reaches end zone, game is over, and winGame() is executed
-        if (startRow === 1) {
+        if (startRow === 1 && level < 10) {
+            increaseLevel();
+        } else if (startRow === 1 && level >= 10) {
+            
+            if (lives === 1) {
+                score += 50;
+            } else if (lives === 2) {
+                score += 200;
+            } else if (lives === 3) {
+                score += 500;
+            }
+
             winGame();
         }
-    }
-
-    setInterval(moveBlockMiddleLeft, 7);
+    } 
 
     function moveBlockRight() {
 
@@ -85,13 +110,21 @@ function playGame() {
             lostLife();
         }
 
-        //If player reaches end zone, game is over, and winGame() is executed
-        if (startRow === 1) {
+        if (startRow === 1 && level < 10) {
+            increaseLevel();
+        } else if (startRow === 1 && level >= 10) {
+            
+            if (lives === 1) {
+                score += 50;
+            } else if (lives === 2) {
+                score += 200;
+            } else if (lives === 3) {
+                score += 500;
+            }
+
             winGame();
         }
     }
-
-    setInterval(moveBlockRight, 5);
 
     function moveBlockMiddleRight() {
 
@@ -110,27 +143,71 @@ function playGame() {
         }
 
         //If player reaches end zone, game is over, and winGame() is executed
-        if (startRow === 1) {
+        if (startRow === 1 && level < 10) {
+            increaseLevel();
+        } else if (startRow === 1 && level >= 10) {
+            
+            if (lives === 1) {
+                score += 50;
+            } else if (lives === 2) {
+                score += 200;
+            } else if (lives === 3) {
+                score += 500;
+            }
+
             winGame();
         }
     }
 
-    setInterval(moveBlockMiddleRight, 4);
+    moveBlockLeftInterval = setInterval(moveBlockLeft, 10);
+    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 10);
+    moveBlockRightInterval =setInterval(moveBlockRight, 10);
+    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 10);
 
+    function increaseLevel() {
+        level += 1;
+        $(".Level-Counter").text(`Level: ${level}`);
+        if (lives === 1) {
+            lives += 1;
+            $(".heart2").css({display: "inline"});
+            score += 50;
+            $(".Score-Counter").text(`Score: ${score}`);
+        } else if (lives === 2) {
+            lives += 1;
+            $(".heart3").css({display: "inline"});
+            score += 200;
+            $(".Score-Counter").text(`Score: ${score}`);
+        } else if (lives === 3) {
+            score += 500;
+            $(".Score-Counter").text(`Score: ${score}`);
+        }
+
+        $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
+        startRow = 10; //player start row
+        startPlayerMarginRight = 339;
+        startPlayerMarginLeft = 339;
+        console.log(level);
+
+    }
     //Defines what occurs when player wins game
     function winGame() {
         $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
         startRow = 10; //player start row
         startPlayerMarginRight = 339;
         startPlayerMarginLeft = 339;
-
+        highScore.push(score);
+        console.log(highScore);
+        highScore.sort();
+        
         $("#gameContainer").css({display: "none"});
-        $(".Win-Message").text(`You Win! You completed the game in ${timer} seconds!`)
-        console.log(timer);
-        $(".Win-Message").css({display: "block"})
+        $(".Win-Message").text(`You Win! You completed the game in ${timer} seconds with a score of ${score}!`);
+        $(".High-Score").text(`Your High Score is ${highScore[highScore.length-1]}`);
+        $(".Win-Message").css({display: "block"});
+        $(".High-Score").css({display: "block"});
         $(".playAgain").css({display: "block"});
         lives = 3;
-        return;
+        level = 1;
+        // return;
     }
 
     function lostLife() {
@@ -146,10 +223,13 @@ function playGame() {
         } else if (lives === 1) {
             $(".heart2").css({display: "none"});
         } else if (lives <= 0) {
+            $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
             $("#gameContainer").css({display: "none"});
             $(".Loss-Message").css({display: "block"})
             $(".playAgain").css({display: "block"});
-            return;
+            lives = 3;
+            level = 1;
+            //return;
         }
     }
 
@@ -203,7 +283,7 @@ function playGame() {
         timer++;
         $(".Timer").text(`Time: ${timer}s`);
     }
-    setInterval(timerRun, 1000);
+    timerInterval = setInterval(timerRun, 1000);
 }
 
 //Event listener on button to start game
@@ -216,19 +296,34 @@ $(".playAgain").on("click", function () {
     $("#gameContainer").css({display: "grid"});
     $(".Loss-Message").css({display: "none"});
     $(".Win-Message").css({display: "none"});
+    $(".High-Score").css({display: "none"});
     $(".playAgain").css({display: "none"});
 
     lives = 3;
     timer = 0;
+    level = 1;
+    score = 0;
+
+    $(".Score-Counter").text(`Score: 0`);
+    $(".Level-Counter").text(`Level: ${level}`);
     $(".Timer").text(`Time: ${timer}s`);
     $(".heart2").css({display: "inline"});
     $(".heart3").css({display: "inline"});
     $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
+
     document.querySelector("#gameContainer").reset();
     // $("#gameContainer").reset();
-
+    clearInterval(moveBlockLeftInterval);
+    clearInterval(moveBlockMiddleLeftInterval);
+    clearInterval(moveBlockRightInterval);
+    clearInterval(moveBlockMiddleRightInterval);
+    clearInterval(timerInterval);
     playGame();
 });
+
+
+
+
 
 //Old motion function with all obstacles combined:
 
