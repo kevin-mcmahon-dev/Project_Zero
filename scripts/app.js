@@ -159,10 +159,10 @@ function playGame() {
         }
     }
 
-    moveBlockLeftInterval = setInterval(moveBlockLeft, 4);
-    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 7);
-    moveBlockRightInterval =setInterval(moveBlockRight, 5);
-    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 4);
+    moveBlockLeftInterval = setInterval(moveBlockLeft, 10);
+    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 10);
+    moveBlockRightInterval =setInterval(moveBlockRight, 10);
+    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 10);
 
     function increaseLevel() {
         level += 1;
@@ -207,6 +207,8 @@ function playGame() {
         $(".playAgain").css({display: "block"});
         lives = 3;
         level = 1;
+        //Prevents key entry stacking issues
+        window.removeEventListener("keydown", keyInput, true);
         return console.log("You Win!");
     }
 
@@ -229,15 +231,15 @@ function playGame() {
             $(".playAgain").css({display: "block"});
             lives = 3;
             level = 1;
+            //Prevents key entry stacking issues
+            window.removeEventListener("keydown", keyInput, true);
             return console.log("You Lose!");
         }
     }
 
-    ///Event listener to read for arrow key inputs
-    window.addEventListener("keydown", function (e) {
-        // if (e.defaultPrevented) {
-        //     return;
-        // }
+    ///Function and event listener for arrow key inputs
+    //Source: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key#example
+    function keyInput(e) {
         switch (e.key) {
             case "ArrowDown":
                 if (startRow === 10) {
@@ -276,8 +278,10 @@ function playGame() {
 
         playerX = startPlayerMarginRight;
         e.preventDefault();
-    }, true);
+    }
     
+    window.addEventListener("keydown", keyInput, true);
+
     //tracks time in the game
     function timerRun() {
         timer++;
@@ -312,7 +316,6 @@ $(".playAgain").on("click", function () {
     $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
 
     // document.querySelector("#gameContainer").reset();
-    // $("#gameContainer").reset();
     clearInterval(moveBlockLeftInterval);
     clearInterval(moveBlockMiddleLeftInterval);
     clearInterval(moveBlockRightInterval);
@@ -321,60 +324,46 @@ $(".playAgain").on("click", function () {
     playGame();
 });
 
+//    window.addEventListener("keydown", function (e) {
+//         // if (e.defaultPrevented) {
+//         //     return;
+//         // }
+//         switch (e.key) {
+//             case "ArrowDown":
+//                 if (startRow === 10) {
+//                     break;
+//                 }
+//                 console.log("down");
+//                 $(".player").css({gridRow: `${startRow = startRow + 1}`});
+//                 break;
+//             case "ArrowUp":
+//                 if (startRow === 1) {
+//                     break;
+//                 }
+//                 console.log("up");
+//                 $(".player").css({gridRow: `${startRow = startRow - 1}`});
+//                 break;
+//             case "ArrowLeft":
+//                 if (startPlayerMarginLeft < 0) {
+//                     lostLife();
+//                     break;
+//                 }
+//                 console.log("left");
+//                 $(".player").css({marginRight: `${startPlayerMarginRight += 52}px`, marginLeft: `${startPlayerMarginLeft -= 52}px`});
+//                 break;
+//             case "ArrowRight":
+//                 if (startPlayerMarginRight < 0) {
+//                     lostLife();
+//                     break;
+//                 }
+//                 console.log("right");
+//                 $(".player").css({marginRight: `${startPlayerMarginRight -= 52}px`, marginLeft: `${startPlayerMarginLeft += 52}px`});
 
+//                 break;
+//             default:
+//                 return;
+//         }
 
-
-
-//Old motion function with all obstacles combined:
-
-   // function moveBlock() { //This combines the motion functions into one; however, only one speed can be chosen for all blocks
-
-    //     increment += 2;
-    //     incrementMiddle += 2;
-
-    //     $(".motionLeft").css({ marginRight: `${-60+increment}px`, marginLeft: `${720-increment}px` }); //had difficulty with syntax of template literals in this case
-    //     $(".motionRight").css({ marginRight: `${720-increment}px`, marginLeft: `${-60+increment}px` }); 
-
-    //     $(".motionLeftOffset").css({ marginRight: `${360 + incrementMiddle}px`, marginLeft: `${300-incrementMiddle}px` });
-    //     $(".motionRightOffset").css({ marginRight: `${300-incrementMiddle}px`, marginLeft: `${360 + incrementMiddle}px` }); 
-
-    //     if (increment >= 780) { //resets increment value when obstacle leaves game area, creating appearance that it looped back to original location
-    //         increment = 0;
-    //     }
-
-    //     if (incrementMiddle >= 360) {
-    //         incrementMiddle = -420;
-    //     }
-
-    //     if (playerX < (increment - 60 + obstacleWidth) && (playerX + playerWidth) > (increment-60) && 
-    //         (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
-    //         console.log("hit from right");
-    //         lostLife();
-    //     }
-
-    //     if (playerX < (incrementMiddle + obstacleWidth + 360) && (playerX + playerWidth) > (incrementMiddle + 360) && 
-    //         (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
-    //         console.log("hit from right");
-    //         lostLife();
-    //     }
-
-    //     if (playerX < ((720-increment)+obstacleWidth) && (playerX + playerWidth) > (720-increment) && 
-    //         (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
-    //         console.log("hit from left");
-    //         lostLife();
-    //     }
-
-    //     if (playerX < ((300-incrementMiddle)+obstacleWidth) && (playerX + playerWidth) > (300-incrementMiddle) && 
-    //         (startRow === 8 || startRow === 6 || startRow === 4 || startRow === 2)) {
-    //         console.log("hit from left");
-    //         lostLife();
-    //     }
-
-    //     //If player reaches end zone, game is over, and winGame() is executed
-    //     if (startRow === 1) {
-    //         winGame();
-    //     }
-    // }
-
-    // setInterval(moveBlock, 50);
-
+//         playerX = startPlayerMarginRight;
+//         e.preventDefault();
+//     }, true);
