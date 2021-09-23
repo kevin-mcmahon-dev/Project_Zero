@@ -10,6 +10,7 @@ let moveBlockMiddleRightInterval;
 let timerInterval;
 
 let highScore = [];
+
 function playGame() {
 
     $(".player").css({backgroundColor: "rgba(0,0,0,100)"});
@@ -295,7 +296,6 @@ $(".startGame").on("click", playGame);
 
 //Button click to play again after victory or gameover
 $(".playAgain").on("click", function () {
-    console.log("Another one");
 
     $("#gameContainer").css({display: "grid"});
     $(".Loss-Message").css({display: "none"});
@@ -323,6 +323,8 @@ $(".playAgain").on("click", function () {
     clearInterval(timerInterval);
     playGame();
 });
+
+// Original key entry eventlistener with anonymous function
 
 //    window.addEventListener("keydown", function (e) {
 //         // if (e.defaultPrevented) {
