@@ -160,10 +160,10 @@ function playGame() {
         }
     }
 
-    moveBlockLeftInterval = setInterval(moveBlockLeft, 10);
-    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 10);
-    moveBlockRightInterval =setInterval(moveBlockRight, 10);
-    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 10);
+    moveBlockLeftInterval = setInterval(moveBlockLeft, 4);
+    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 7);
+    moveBlockRightInterval =setInterval(moveBlockRight, 5);
+    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 4);
 
     function increaseLevel() {
         level += 1;
