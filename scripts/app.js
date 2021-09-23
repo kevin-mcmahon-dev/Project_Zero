@@ -159,10 +159,10 @@ function playGame() {
         }
     }
 
-    moveBlockLeftInterval = setInterval(moveBlockLeft, 10);
-    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 10);
-    moveBlockRightInterval =setInterval(moveBlockRight, 10);
-    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 10);
+    moveBlockLeftInterval = setInterval(moveBlockLeft, 4);
+    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 7);
+    moveBlockRightInterval =setInterval(moveBlockRight, 5);
+    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 4);
 
     function increaseLevel() {
         level += 1;
@@ -207,7 +207,7 @@ function playGame() {
         $(".playAgain").css({display: "block"});
         lives = 3;
         level = 1;
-        // return;
+        return console.log("You Win!");
     }
 
     function lostLife() {
@@ -229,7 +229,7 @@ function playGame() {
             $(".playAgain").css({display: "block"});
             lives = 3;
             level = 1;
-            //return;
+            return console.log("You Lose!");
         }
     }
 
@@ -270,8 +270,8 @@ function playGame() {
                 $(".player").css({marginRight: `${startPlayerMarginRight -= 52}px`, marginLeft: `${startPlayerMarginLeft += 52}px`});
 
                 break;
-            // default:
-            //     return;
+            default:
+                return;
         }
 
         playerX = startPlayerMarginRight;
@@ -311,7 +311,7 @@ $(".playAgain").on("click", function () {
     $(".heart3").css({display: "inline"});
     $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
 
-    document.querySelector("#gameContainer").reset();
+    // document.querySelector("#gameContainer").reset();
     // $("#gameContainer").reset();
     clearInterval(moveBlockLeftInterval);
     clearInterval(moveBlockMiddleLeftInterval);
