@@ -42,7 +42,7 @@ p {
 }
 .LifeCounter {
     font-size: 16px;
-    margin: 5px 0px 0px 5px;
+    margin: 5px 20px 0px 5px;
     display: inline;
 }
 .fa-heart {
@@ -50,11 +50,23 @@ p {
     font-size: 14px;
     display: inline;
 }
+.Level-Counter {
+    font-size: 16px;
+    display: inline;
+    margin: 5px 20px 0px 60px;
+}
 .Timer {
     font-size: 16px;
-    margin-left: 5px;
+    display: inline;
+    margin-left: 80px;
     margin-top: 5px;
+    margin-right: 20px;
 }
+.Score-Counter {
+    font-size: 16px;
+    display: inline;
+    margin: 5px 20px 0px 50px;
+} 
 .Zone8 {
     grid-row: 2/3;
     grid-column: 1;
@@ -201,6 +213,13 @@ p {
     color: white;
     font-size: 26px;
     margin-top: 35px;
+    margin-bottom: 0px;
+}
+.High-Score {
+    display: none;
+    color: white;
+    font-size: 26px;
+    margin-top: 10px;
     margin-bottom: 0px;
 }
 .playAgain {
