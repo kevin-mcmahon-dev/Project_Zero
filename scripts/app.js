@@ -1,15 +1,53 @@
+class Obstacle {
+    constructor(id, blockStartSpeed, moveBlockInterval, increment, obstacleWidth, marginRight, gridRow, position) {
+        this.id = id;
+        this.blockStartSpeed = blockStartSpeed;
+        this.moveBlockInterval = moveBlockInterval;
+        this.increment = increment;
+        this.obstacleWidth = obstacleWidth;
+        this.marginRight = marginRight;
+        this.gridRow = gridRow;
+        this.position = position;
+    }
+}
+
+function createObstacles(numObstacles) {
+    for (let i = 0; i < numObstacles; i++) {  
+        for (let j = 0; j < 4; j++) {
+            if (j === 0) {
+
+            } else if (j === 1) {
+
+            } else if (j === 2) {
+
+            } else if (j === 3) {
+                
+            }
+        }
+    }
+}
+const ob1 =  new Obstacle(15, 3, 7);
+    // blockstartSpeed: 15,
+    // moveBlockInterval: 0,
+
+
 let lives = 3;
-let timer = 0;
 let level = 1;
+let timer = 0;
 let score = 0;
+let highScore = [];
+
+let blockLeftStartSpeed = 15;
+let blockMiddleLeftStartSpeed = 12;
+let blockRightStartSpeed = 14;
+let blockMiddleRightStartSpeed = 13;
 
 let moveBlockLeftInterval;
 let moveBlockMiddleLeftInterval;
 let moveBlockRightInterval;
 let moveBlockMiddleRightInterval;
-let timerInterval;
 
-let highScore = [];
+let timerInterval;
 
 function playGame() {
 
@@ -25,10 +63,11 @@ function playGame() {
     let startPlayerMarginRight = 339;
     let startPlayerMarginLeft = 339;
 
-    let incrementLeft = 0; //defined outside function so the value can accumulate
+    let incrementLeft = 0; //defined outside moveBlock functions so the value can accumulate
     let incrementMiddleLeft = 0;
     let incrementRight = 0;
     let incrementMiddleRight = 0;
+
 
     //Controls motion of obstacles, hit detection, and detemines if player has reached end zone
     function moveBlockLeft() {
@@ -160,14 +199,33 @@ function playGame() {
         }
     }
 
-    moveBlockLeftInterval = setInterval(moveBlockLeft, 4);
-    moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, 7);
-    moveBlockRightInterval =setInterval(moveBlockRight, 5);
-    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, 4);
+    moveBlockLeftInterval = setInterval(moveBlockLeft, blockLeftStartSpeed);
+    moveBlockMiddleLeftInterval = setInterval(moveBlockMiddleLeft, blockMiddleLeftStartSpeed);
+    moveBlockRightInterval = setInterval(moveBlockRight, blockRightStartSpeed);
+    moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, blockMiddleRightStartSpeed);
 
     function increaseLevel() {
+        
         level += 1;
         $(".Level-Counter").text(`Level: ${level}`);
+
+        let multiplier = 0.99;
+
+        blockLeftStartSpeed = blockLeftStartSpeed - multiplier;
+        blockMiddleLeftStartSpeed = blockMiddleLeftStartSpeed - multiplier;
+        blockRightStartSpeed = blockRightStartSpeed - multiplier;
+        blockMiddleRightStartSpeed = blockMiddleRightStartSpeed - multiplier;
+
+        clearInterval(moveBlockLeftInterval);
+        clearInterval(moveBlockMiddleLeftInterval);
+        clearInterval(moveBlockRightInterval);
+        clearInterval(moveBlockMiddleRightInterval);
+
+        moveBlockLeftInterval = setInterval(moveBlockLeft, blockLeftStartSpeed);
+        moveBlockMiddleLeftInterval =setInterval(moveBlockMiddleLeft, blockMiddleLeftStartSpeed);
+        moveBlockRightInterval =setInterval(moveBlockRight, blockRightStartSpeed);
+        moveBlockMiddleRightInterval = setInterval(moveBlockMiddleRight, blockMiddleRightStartSpeed);
+
         if (lives === 1) {
             lives += 1;
             $(".heart2").css({display: "inline"});
@@ -315,6 +373,11 @@ $(".playAgain").on("click", function () {
     $(".heart3").css({display: "inline"});
     $(".player").css({gridRow: "10", marginRight: "339px", marginLeft: "339px"});
 
+    blockLeftStartSpeed = 15;
+    blockMiddleLeftStartSpeed = 12;
+    blockRightStartSpeed = 14;
+    blockMiddleRightStartSpeed = 13;
+
     // document.querySelector("#gameContainer").reset();
     clearInterval(moveBlockLeftInterval);
     clearInterval(moveBlockMiddleLeftInterval);
@@ -323,49 +386,3 @@ $(".playAgain").on("click", function () {
     clearInterval(timerInterval);
     playGame();
 });
-
-// Original key entry eventlistener with anonymous function
-
-//    window.addEventListener("keydown", function (e) {
-//         // if (e.defaultPrevented) {
-//         //     return;
-//         // }
-//         switch (e.key) {
-//             case "ArrowDown":
-//                 if (startRow === 10) {
-//                     break;
-//                 }
-//                 console.log("down");
-//                 $(".player").css({gridRow: `${startRow = startRow + 1}`});
-//                 break;
-//             case "ArrowUp":
-//                 if (startRow === 1) {
-//                     break;
-//                 }
-//                 console.log("up");
-//                 $(".player").css({gridRow: `${startRow = startRow - 1}`});
-//                 break;
-//             case "ArrowLeft":
-//                 if (startPlayerMarginLeft < 0) {
-//                     lostLife();
-//                     break;
-//                 }
-//                 console.log("left");
-//                 $(".player").css({marginRight: `${startPlayerMarginRight += 52}px`, marginLeft: `${startPlayerMarginLeft -= 52}px`});
-//                 break;
-//             case "ArrowRight":
-//                 if (startPlayerMarginRight < 0) {
-//                     lostLife();
-//                     break;
-//                 }
-//                 console.log("right");
-//                 $(".player").css({marginRight: `${startPlayerMarginRight -= 52}px`, marginLeft: `${startPlayerMarginLeft += 52}px`});
-
-//                 break;
-//             default:
-//                 return;
-//         }
-
-//         playerX = startPlayerMarginRight;
-//         e.preventDefault();
-//     }, true);
