@@ -1,35 +1,74 @@
 class Obstacle {
-    constructor(id, blockStartSpeed, moveBlockInterval, increment, obstacleWidth, marginRight, gridRow, position) {
+    constructor(id, blockStartSpeed, blockInterval, increment, obstacleWidth, marginRight, marginLeft, gridRow, position) {
         this.id = id;
         this.blockStartSpeed = blockStartSpeed;
-        this.moveBlockInterval = moveBlockInterval;
+        this.blockInterval = blockInterval;
         this.increment = increment;
         this.obstacleWidth = obstacleWidth;
         this.marginRight = marginRight;
+        this.marginLeft = marginLeft;
         this.gridRow = gridRow;
         this.position = position;
     }
 }
 
-function createObstacles(numObstacles) {
-    for (let i = 0; i < numObstacles; i++) {  
-        for (let j = 0; j < 4; j++) {
-            if (j === 0) {
+const obstacleCreator = {
+    obstacles: [],
+    create(num) {
+        for (let i = 1; i <= num/4; i++) {         
 
-            } else if (j === 1) {
+            let obs = new Obstacle(this.obstacles.length, 14, 0, 0, 60, -60, 720, 2*i+1, "right");
+            this.obstacles.push(obs);
+            
+            obs = new Obstacle(this.obstacles.length, 12, 0, 0, 60, 360, 300, 2*i+1, "middleRight");
+            this.obstacles.push(obs);
+            
+            obs = new Obstacle(this.obstacles.length, 15, 0, 0, 60, 300, 360, 2*i, "left");
+            this.obstacles.push(obs);        
+            
+            obs = new Obstacle(this.obstacles.length, 13, 0, 0, 60, 720, -60, 2*i, "middleLeft");
+            this.obstacles.push(obs);
 
-            } else if (j === 2) {
-
-            } else if (j === 3) {
-                
-            }
         }
     }
 }
-const ob1 =  new Obstacle(15, 3, 7);
-    // blockstartSpeed: 15,
-    // moveBlockInterval: 0,
+obstacleCreator.create(16);
+// console.log(obstacleCreator.obstacles);
 
+let obstacles = obstacleCreator.obstacles;
+// console.log(obstacles);
+console.log(obstacles[0].blockStartSpeed);
+function moveBlock() {
+
+    obstacles[i].increment += 2;
+
+    $(".motionLeft").css({ marginRight: `${-60+incrementLeft}px`, marginLeft: `${720-incrementLeft}px` }); //had difficulty with syntax of template literals in this case
+
+    if (incrementLeft >= 780) { //resets increment value when obstacle leaves game area, creating appearance that it looped back to original location
+        incrementLeft = 0;
+    }
+
+    if (playerX < (incrementLeft - 60 + obstacleWidth) && (playerX + playerWidth) > (incrementLeft-60) && 
+        (startRow === 9 || startRow === 7 || startRow === 5 || startRow === 3)) {
+        console.log("hit from right");
+        lostLife();
+    }
+
+    if (startRow === 1 && level < 10) {
+        increaseLevel();
+    } else if (startRow === 1 && level >= 10) {
+        
+        if (lives === 1) {
+            score += 50;
+        } else if (lives === 2) {
+            score += 200;
+        } else if (lives === 3) {
+            score += 500;
+        }
+
+        winGame();
+    }
+}
 
 let lives = 3;
 let level = 1;
@@ -209,12 +248,12 @@ function playGame() {
         level += 1;
         $(".Level-Counter").text(`Level: ${level}`);
 
-        let multiplier = 0.99;
+        let multiplier = 0.9;
 
-        blockLeftStartSpeed = blockLeftStartSpeed - multiplier;
-        blockMiddleLeftStartSpeed = blockMiddleLeftStartSpeed - multiplier;
-        blockRightStartSpeed = blockRightStartSpeed - multiplier;
-        blockMiddleRightStartSpeed = blockMiddleRightStartSpeed - multiplier;
+        blockLeftStartSpeed *= multiplier;
+        blockMiddleLeftStartSpeed *= multiplier;
+        blockRightStartSpeed *= multiplier;
+        blockMiddleRightStartSpeed *= multiplier;
 
         clearInterval(moveBlockLeftInterval);
         clearInterval(moveBlockMiddleLeftInterval);
