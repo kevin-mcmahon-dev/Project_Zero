@@ -1,4 +1,4 @@
-# Project_Zero
+# Dodge-the-boulders
 
 In this game, the player must navigate from the start zone, through a field of obstacles to reach the end zone. The obstacles are a series of horizontally moving blocks. Each row of obstacles will alternately be moving left or right. The player can use the up and down arrow keys to navigate forward or backward from row to row. The player can use the left and right arrow keys to move sideways along the row that the player is currently in. When the player makes contact with an obstacle or moves off the game area, one life is lost. When a life is lost, the player is reset to the start zone. In each game, the player has three lives before the game is over. When a player safely reaches the end zone, the level is completed and the player is automatically reset to the start zone for the next level. When 10 levels are completed, the game is won.
 
